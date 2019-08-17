@@ -62,6 +62,12 @@ for (prefix, url) in urls:
             nmolecules += 1
 
         ifs.close()
+        # Remove molecule file
         os.remove(name)
     ofs.close()
     print(f'{nmolecules} read')
+    # Remove temporary directory for unpackign molecules
+    os.rmdir(f'{prefix}_mols')
+    # Remove downloaded tarfile
+    os.remove(tarfile_filename)
+
