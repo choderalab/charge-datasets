@@ -12,15 +12,7 @@ https://opendatacommons.org/licenses/by/1-0/index.html
 ## Manifest
 
 * `environment.yml` - conda environment
-* `scripts/` - scripts to generate charge datasets
 * `datasets/` - datasets
-
-## Scripts
-
-* `run-lsf.sh` - LSF submission script using job arrays
-* `convert.py` - script to convert directory of .mol2 files into single .oeb file
-* `charge.py` - generate .oeb file containing AM1-BCC charges for a shard of input .oeb file
-* `compile.py` - compile .oeb shards into a single .oeb file
 
 ## Datasets
 
