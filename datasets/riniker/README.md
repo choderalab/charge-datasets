@@ -17,8 +17,18 @@ The dataset was downloaded from https://www.research-collection.ethz.ch/handle/2
 * ZINC: ~90K molecules
 
 ## Manifest
-* `retrieve-smiles.py` - retrieve datasets as compressed SMILES files (`.smi.gz`)
+* `retrieve.py` - retrieve datasets as compressed SMILES files (`.smi.gz`)
 * `ChEMBL.smi.gz` - SMILES for ChEMBL dataset
 * `ZINC.smi.gz` - SMILES for ZINC dataset
 
+## Usage
+
+```bash
+# Retrieve SMILES datasets
+python retrieve.py
+# Charge dataset fragmetns
+bsub < run-lsf.sh
+# Assemble fragments
+python assemble.py
+```
 

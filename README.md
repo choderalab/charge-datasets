@@ -35,6 +35,12 @@ source: https://www.research-collection.ethz.ch/handle/20.500.11850/230799
 * ChEMBL - 40K
 * ZINC - 90K 
 
+### PDB Ligand Expo (`pdb`)
+
+http://ligand-expo.rcsb.org/ld-download.html
+
+source: http://ligand-expo.rcsb.org/dictionaries/Components-smiles-stereo-oe.smi
+
 ### NCI250K (`nci250k`)
 
 The NCI250K dataset was retrieve from https://cactus.nci.nih.gov/download/nci/ and processed into a SMILES file by:
