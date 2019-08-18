@@ -20,5 +20,5 @@ Under `dataset/` you will find the following:
 * `fda/` - [FDA-approved small molecules](https://zinc.docking.org/substances/subsets/fda/) with ~1.5K molecules
 * `riniker/` - [Riniker charge sets](https://www.research-collection.ethz.ch/handle/20.500.11850/230799) with ChEMBL (40K) and ZINC (90K) subsets
 * `pdb/` - the [PDB Ligand Expo](http://ligand-expo.rcsb.org/ld-download.html) containing ~23K molecules from the [PDB](http://rcsb.org)
-* `nci250k/` - The [NCI250K](https://cactus.nci.nih.gov/download/nci/ set of small organic molecules of interest to drug discovery (~120K)
+* `nci250k/` - The [NCI250K](https://cactus.nci.nih.gov/download/nci/) set of small organic molecules of interest to drug discovery (~120K)
 
