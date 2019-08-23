@@ -27,6 +27,13 @@ from openeye import oequacpac
 import time
 from fragmenter.chemi import get_charges
 
+def enumerate_states(mol):
+    enumerated_mols = list()
+    for charge_mol in oequacpac.OEEnumerateFormalCharges(mol):
+        for tautomer_mol in oequacpac.OEGetReasonableTautomers(charge_mol):
+            enumerated_mols.append( oechem.OEMol(tautomer_mol) )
+    return enumerated_mols
+
 def main(argv=[__name__]):
     if len(argv) != 5:
         oechem.OEThrow.Usage("%s <infile> <outfile> <frag> <nfrags>" % argv[0])
@@ -76,27 +83,29 @@ def main(argv=[__name__]):
             continue
 
         print(f'Processing {index} in range {nstart}:{nstart+nprocess} ({(index - nstart) / nprocess * 100.0}%)')
-        try:
-            mol = get_charges(mol)
-            conf = mol.GetConf(oechem.OEHasConfIdx(0))
-            absFCharge = 0
-            sumFCharge = 0
-            sumPCharge = 0.0
-            for atm in mol.GetAtoms():
-                sumFCharge += atm.GetFormalCharge()
-                absFCharge += abs(atm.GetFormalCharge())
-                sumPCharge += atm.GetPartialCharge()
-            print("{}: {} formal charges give total charge {}"
-                  "; sum of partial charges {:5.4f}".format(mol.GetTitle(), absFCharge,
+        mols = enumerate_states(mol)
+        for charge_mol in mols:
+            try:
+                charge_mol = get_charges(charge_mol)
+                conf = charge_mol.GetConf(oechem.OEHasConfIdx(0))
+                absFCharge = 0
+                sumFCharge = 0
+                sumPCharge = 0.0
+                for atm in mol.GetAtoms():
+                    sumFCharge += atm.GetFormalCharge()
+                    absFCharge += abs(atm.GetFormalCharge())
+                    sumPCharge += atm.GetPartialCharge()
+                print("{}: {} formal charges give total charge {}"
+                  "; sum of partial charges {:5.4f}".format(charge_mol.GetTitle(), absFCharge,
                                                             sumFCharge, sumPCharge))
-            oechem.OEWriteMolecule(ofs, conf)
-            nmolecules += 1
-            total_time = time.time() - initial_time
-            average_time = total_time / nmolecules
-            print(f'{nmolecules} molecules processed in {total_time} seconds : {average_time} seconds/molecule')
-        except Exception as e:
-            print("Failed to generate charge(s) for molecule %s" % mol.GetTitle())
-            print(e)
+                oechem.OEWriteMolecule(ofs, conf)
+                nmolecules += 1
+                total_time = time.time() - initial_time
+                average_time = total_time / nmolecules
+                print(f'{nmolecules} molecules processed in {total_time} seconds : {average_time} seconds/molecule')
+            except Exception as e:
+                print("Failed to generate charge(s) for molecule %s" % mol.GetTitle())
+                print(e)
 
     return 0
 

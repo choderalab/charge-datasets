@@ -13,8 +13,10 @@ The dataset was downloaded from https://www.research-collection.ethz.ch/handle/2
 
 ## Dataset composition
 
-* ChEMBL: ~40K molecules
-* ZINC: ~90K molecules
+Expanded charge and protonation states
+
+* ChEMBL: 107254 molecules
+* ZINC: 256184 molecules
 
 ## Manifest
 * `retrieve.py` - retrieve datasets as compressed SMILES files (`.smi.gz`)
